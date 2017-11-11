@@ -7,14 +7,14 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		130274EF1FB5EC7F007E4DD9 /* Graphics.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 130274EA1FB5EC7F007E4DD9 /* Graphics.cpp */; };
-		130274F01FB5EC7F007E4DD9 /* Keyboard.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 130274EB1FB5EC7F007E4DD9 /* Keyboard.cpp */; };
-		130274F11FB5EC7F007E4DD9 /* Mouse.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 130274EC1FB5EC7F007E4DD9 /* Mouse.cpp */; };
-		130274F21FB5EC7F007E4DD9 /* main.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 130274ED1FB5EC7F007E4DD9 /* main.cpp */; };
-		130274F31FB5EC7F007E4DD9 /* Object.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 130274EE1FB5EC7F007E4DD9 /* Object.cpp */; };
 		130274FC1FB5ED11007E4DD9 /* OpenGL.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 130274E81FB5EC45007E4DD9 /* OpenGL.framework */; };
 		130274FD1FB5ED18007E4DD9 /* GLUT.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 130274E91FB5EC4D007E4DD9 /* GLUT.framework */; };
 		130274FE1FB5ED1D007E4DD9 /* GLKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 130274FB1FB5ECCE007E4DD9 /* GLKit.framework */; };
+		132E56331FB72B7B00794D35 /* main.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 132E562E1FB72B7B00794D35 /* main.cpp */; };
+		132E56341FB72B7B00794D35 /* Mouse.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 132E562F1FB72B7B00794D35 /* Mouse.cpp */; };
+		132E56351FB72B7B00794D35 /* Object.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 132E56301FB72B7B00794D35 /* Object.cpp */; };
+		132E56361FB72B7B00794D35 /* Graphics.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 132E56311FB72B7B00794D35 /* Graphics.cpp */; };
+		132E56371FB72B7B00794D35 /* Keyboard.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 132E56321FB72B7B00794D35 /* Keyboard.cpp */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXCopyFilesBuildPhase section */
@@ -33,18 +33,18 @@
 		130274DD1FB5EC34007E4DD9 /* myOpenGlProject */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = myOpenGlProject; sourceTree = BUILT_PRODUCTS_DIR; };
 		130274E81FB5EC45007E4DD9 /* OpenGL.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = OpenGL.framework; path = System/Library/Frameworks/OpenGL.framework; sourceTree = SDKROOT; };
 		130274E91FB5EC4D007E4DD9 /* GLUT.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = GLUT.framework; path = System/Library/Frameworks/GLUT.framework; sourceTree = SDKROOT; };
-		130274EA1FB5EC7F007E4DD9 /* Graphics.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = Graphics.cpp; path = ../../strangeProject/OpenGlBackUp/Sourse/Graphics.cpp; sourceTree = "<group>"; };
-		130274EB1FB5EC7F007E4DD9 /* Keyboard.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = Keyboard.cpp; path = ../../strangeProject/OpenGlBackUp/Sourse/Keyboard.cpp; sourceTree = "<group>"; };
-		130274EC1FB5EC7F007E4DD9 /* Mouse.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = Mouse.cpp; path = ../../strangeProject/OpenGlBackUp/Sourse/Mouse.cpp; sourceTree = "<group>"; };
-		130274ED1FB5EC7F007E4DD9 /* main.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = main.cpp; path = ../../strangeProject/OpenGlBackUp/Sourse/main.cpp; sourceTree = "<group>"; };
-		130274EE1FB5EC7F007E4DD9 /* Object.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = Object.cpp; path = ../../strangeProject/OpenGlBackUp/Sourse/Object.cpp; sourceTree = "<group>"; };
-		130274F51FB5ECA3007E4DD9 /* Geometry.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Geometry.h; path = ../../strangeProject/OpenGlBackUp/Headers/Geometry.h; sourceTree = "<group>"; };
-		130274F61FB5ECA3007E4DD9 /* Graphics.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Graphics.h; path = ../../strangeProject/OpenGlBackUp/Headers/Graphics.h; sourceTree = "<group>"; };
-		130274F71FB5ECA3007E4DD9 /* Keyboard.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Keyboard.h; path = ../../strangeProject/OpenGlBackUp/Headers/Keyboard.h; sourceTree = "<group>"; };
-		130274F81FB5ECA3007E4DD9 /* Mouse.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Mouse.h; path = ../../strangeProject/OpenGlBackUp/Headers/Mouse.h; sourceTree = "<group>"; };
-		130274F91FB5ECA3007E4DD9 /* Object.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Object.h; path = ../../strangeProject/OpenGlBackUp/Headers/Object.h; sourceTree = "<group>"; };
-		130274FA1FB5ECA3007E4DD9 /* General.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = General.h; path = ../../strangeProject/OpenGlBackUp/Headers/General.h; sourceTree = "<group>"; };
 		130274FB1FB5ECCE007E4DD9 /* GLKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = GLKit.framework; path = System/Library/Frameworks/GLKit.framework; sourceTree = SDKROOT; };
+		132E56281FB72B6E00794D35 /* Object.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Object.h; sourceTree = "<group>"; };
+		132E56291FB72B6E00794D35 /* General.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = General.h; sourceTree = "<group>"; };
+		132E562A1FB72B6E00794D35 /* Graphics.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Graphics.h; sourceTree = "<group>"; };
+		132E562B1FB72B6E00794D35 /* Keyboard.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Keyboard.h; sourceTree = "<group>"; };
+		132E562C1FB72B6E00794D35 /* Mouse.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Mouse.h; sourceTree = "<group>"; };
+		132E562D1FB72B6F00794D35 /* Geometry.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Geometry.h; sourceTree = "<group>"; };
+		132E562E1FB72B7B00794D35 /* main.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = main.cpp; sourceTree = "<group>"; };
+		132E562F1FB72B7B00794D35 /* Mouse.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Mouse.cpp; sourceTree = "<group>"; };
+		132E56301FB72B7B00794D35 /* Object.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Object.cpp; sourceTree = "<group>"; };
+		132E56311FB72B7B00794D35 /* Graphics.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Graphics.cpp; sourceTree = "<group>"; };
+		132E56321FB72B7B00794D35 /* Keyboard.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Keyboard.cpp; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -82,11 +82,11 @@
 		130274DF1FB5EC34007E4DD9 /* Sourse */ = {
 			isa = PBXGroup;
 			children = (
-				130274EA1FB5EC7F007E4DD9 /* Graphics.cpp */,
-				130274EB1FB5EC7F007E4DD9 /* Keyboard.cpp */,
-				130274ED1FB5EC7F007E4DD9 /* main.cpp */,
-				130274EC1FB5EC7F007E4DD9 /* Mouse.cpp */,
-				130274EE1FB5EC7F007E4DD9 /* Object.cpp */,
+				132E56311FB72B7B00794D35 /* Graphics.cpp */,
+				132E56321FB72B7B00794D35 /* Keyboard.cpp */,
+				132E562E1FB72B7B00794D35 /* main.cpp */,
+				132E562F1FB72B7B00794D35 /* Mouse.cpp */,
+				132E56301FB72B7B00794D35 /* Object.cpp */,
 			);
 			path = Sourse;
 			sourceTree = "<group>";
@@ -104,12 +104,12 @@
 		130274F41FB5EC87007E4DD9 /* Headers */ = {
 			isa = PBXGroup;
 			children = (
-				130274FA1FB5ECA3007E4DD9 /* General.h */,
-				130274F91FB5ECA3007E4DD9 /* Object.h */,
-				130274F51FB5ECA3007E4DD9 /* Geometry.h */,
-				130274F61FB5ECA3007E4DD9 /* Graphics.h */,
-				130274F71FB5ECA3007E4DD9 /* Keyboard.h */,
-				130274F81FB5ECA3007E4DD9 /* Mouse.h */,
+				132E56291FB72B6E00794D35 /* General.h */,
+				132E562D1FB72B6F00794D35 /* Geometry.h */,
+				132E562A1FB72B6E00794D35 /* Graphics.h */,
+				132E562B1FB72B6E00794D35 /* Keyboard.h */,
+				132E562C1FB72B6E00794D35 /* Mouse.h */,
+				132E56281FB72B6E00794D35 /* Object.h */,
 			);
 			path = Headers;
 			sourceTree = "<group>";
@@ -171,11 +171,11 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				130274F11FB5EC7F007E4DD9 /* Mouse.cpp in Sources */,
-				130274F01FB5EC7F007E4DD9 /* Keyboard.cpp in Sources */,
-				130274F21FB5EC7F007E4DD9 /* main.cpp in Sources */,
-				130274F31FB5EC7F007E4DD9 /* Object.cpp in Sources */,
-				130274EF1FB5EC7F007E4DD9 /* Graphics.cpp in Sources */,
+				132E56371FB72B7B00794D35 /* Keyboard.cpp in Sources */,
+				132E56331FB72B7B00794D35 /* main.cpp in Sources */,
+				132E56341FB72B7B00794D35 /* Mouse.cpp in Sources */,
+				132E56361FB72B7B00794D35 /* Graphics.cpp in Sources */,
+				132E56351FB72B7B00794D35 /* Object.cpp in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
