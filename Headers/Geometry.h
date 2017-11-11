@@ -10,6 +10,7 @@
 #define Geometry_h
 
 #include <math.h>
+#include "glm/vec3.hpp"
 #include <iostream>
 
 const long double EPS = 1e-9;
