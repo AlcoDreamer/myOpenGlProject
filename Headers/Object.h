@@ -10,31 +10,31 @@
 #define Object_h
 
 #include <Glut/glut.h>
-#include "Geometry.h"
+#include "glm/glm.hpp"
 
 class Object {
 public:
     Object();
-    Object(Vect3ld, Vect3ld, Vect3ld, long double);
+    Object(glm::vec3, glm::vec3, glm::vec3, long double);
     ~Object();
     
-    void setPos(Vect3ld);
-    void setVectFront(Vect3ld);
-    void setVectUp(Vect3ld);
-    void setVectRight(Vect3ld);
-    void setVectView(Vect3ld);
+    void setPos(glm::vec3);
+    void setVectFront(glm::vec3);
+    void setVectUp(glm::vec3);
+    void setVectRight(glm::vec3);
+    void setVectView(glm::vec3);
     void setSpeed(long double);
     
-    Vect3ld getPos();
-    Vect3ld getFront();
-    Vect3ld getView();
-    Vect3ld getNorm();
+    glm::vec3 getPos();
+    glm::vec3 getFront();
+    glm::vec3 getView();
+    glm::vec3 getNorm();
     
-    void move(long double, long double, long double);
+    void move(float, float, float);
 
 private:
-    Vect3ld pos, delta, vectUp, vectFront, vectRight, vectView;
-    long double speed;
+    glm::vec3 pos, delta, vectUp, vectFront, vectRight, vectView;
+    float speed;
 };
 
 #endif /* Object_h */

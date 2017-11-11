@@ -59,10 +59,22 @@ void Mouse::setPos(int x, int y) {
     this->x = x; this->y = y;
 }
 
-Vect2ll Mouse::getPos() {
-    return Vect2ll(this->x, this->y);
+glm::ivec2 Mouse::getPos() {
+    return glm::ivec2(this->x, this->y);
 }
 
 long double Mouse::getSpeed() {
     return this->speed;
+}
+
+void Mouse::mouseOn() {
+    this->mouseStatus = true;
+}
+
+void Mouse::mouseOff() {
+    this->mouseStatus = false;
+}
+
+bool Mouse::getMouseStatus() {
+    return this->mouseStatus;
 }

@@ -11,7 +11,7 @@
 
 Object::Object() {}
 
-Object::Object(Vect3ld pos, Vect3ld vectFront, Vect3ld vectUp, long double speed) {
+Object::Object(glm::vec3 pos, glm::vec3 vectFront, glm::vec3 vectUp, long double speed) {
     this->setPos(pos);
     this->setVectFront(vectFront);
     this->setVectView(vectFront);
@@ -22,23 +22,23 @@ Object::Object(Vect3ld pos, Vect3ld vectFront, Vect3ld vectUp, long double speed
 
 Object::~Object() {}
 
-void Object::setPos(Vect3ld pos) {
+void Object::setPos(glm::vec3 pos) {
     this->pos = pos;
 }
 
-void Object::setVectFront(Vect3ld vectFront) {
+void Object::setVectFront(glm::vec3 vectFront) {
     this->vectFront = vectFront;
 }
 
-void Object::setVectUp(Vect3ld vectUp) {
+void Object::setVectUp(glm::vec3 vectUp) {
     this->vectUp = vectUp;
 }
 
-void Object::setVectRight(Vect3ld vectRight) {
+void Object::setVectRight(glm::vec3 vectRight) {
     this->vectRight = vectRight;
 }
 
-void Object::setVectView(Vect3ld vectView) {
+void Object::setVectView(glm::vec3 vectView) {
     this->vectView = vectView;
 }
 
@@ -46,23 +46,30 @@ void Object::setSpeed(long double speed) {
     this->speed = speed;
 }
 
-Vect3ld Object::getPos() {
+glm::vec3 Object::getPos() {
     return this->pos;
 }
 
-Vect3ld Object::getFront() {
+glm::vec3 Object::getFront() {
     return this->vectFront;
 }
 
-Vect3ld Object::getView() {
+glm::vec3 Object::getView() {
     return this->vectView;
 }
 
-Vect3ld Object::getNorm() {
+glm::vec3 Object::getNorm() {
     return this->vectUp;
 }
 
-void Object::move(long double kf, long double ku, long double kr) {
-    this->setVectRight(this->vectFront * this->vectUp);
-    this->pos = this->pos + (this->vectFront * kf + this->vectUp * ku + this->vectRight * kr).normal(speed);
+void Object::move(float kf, float ku, float kr) {
+    this->setVectRight(glm::cross(this->vectFront, this->vectUp));
+    
+    this->delta = this->vectFront * kf + this->vectUp * ku + this->vectRight * kr;
+    if (this->delta != glm::vec3(0.0)) {
+        this->delta = glm::normalize(this->delta) * this->speed;
+    }
+    //std::cerr << v.x << " " << v.y << " " << v.z << std::endl;
+    //std::cerr << v2.x << " " << v2.y << " " << v2.z << std::endl;
+    this->pos = this->pos + this->delta;
 }

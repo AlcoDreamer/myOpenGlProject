@@ -52,10 +52,10 @@ void loop() {
 }
 
 long double df = 0.0, dr = 0.0, du = 0.0;
-Object camera(Vect3ld(0.0, 0.0, 10.0), Vect3ld(0.0, 0.0, -1.0), Vect3ld(0.0, 1.0, 0.0), 0.1);
+Object camera(glm::vec3(0.0, 0.0, 10.0), glm::vec3(0.0, 0.0, -1.0), glm::vec3(0.0, 1.0, 0.0), 0.1);
 
 void setCamera() {
-    Vect3ld v1, v2, v3;
+    glm::vec3 v1, v2, v3;
     v1 = camera.getPos();
     v2 = v1 + camera.getView();
     //std::cerr << camera.getView().x << " " << camera.getView().y << " " << camera.getView().z << std::endl;
@@ -117,8 +117,7 @@ void drawSnowMan() {
 }
 
 void checkKerboard() {
-    //if (mouse.isButtonHeld(GLUT_LEFT_BUTTON))
-        df = dr = du = 0;
+    df = dr = du = 0;
     if (keyboard.wasKeyPressed(27))
         exit(0);
     if (keyboard.isKeyHeld('w')) {
@@ -128,10 +127,10 @@ void checkKerboard() {
         df = -1;
     }
     if (keyboard.isKeyHeld('a')) {
-        dr = 1;
+        dr = -1;
     }
     if (keyboard.isKeyHeld('d')) {
-        dr = -1;
+        dr = 1;
     }
     if (keyboard.isSpecialKeyHeld(GLUT_KEY_UP)) {
         du = 1;
@@ -142,13 +141,22 @@ void checkKerboard() {
 }
 
 void checkMouse() {
-    Vect3ld nv = Vect3ld((mouse.getPos().x - WinWidth / 2) * mouse.getSpeed(),
-                        -(mouse.getPos().y - WinHeight / 2) * mouse.getSpeed(), 0.0);
-    Vect3ld ov = camera.getView();
-    camera.setVectView((nv + ov).normal(1.0));
+    if (mouse.isButtonHeld(GLUT_LEFT_BUTTON)) {
+        mouse.mouseOn();
+    }
+    if (mouse.isButtonHeld(GLUT_RIGHT_BUTTON)) {
+        mouse.mouseOff();
+    }
     
-    //std::cerr << mouse.getPos().x << " " << mouse.getPos().y << std::endl;
-    //glutWarpPointer(WinWidth / 2, WinHeight / 2);
+    if (mouse.getMouseStatus()) {
+        glm::vec3 nv = glm::vec3((mouse.getPos().x - WinWidth / 2) * mouse.getSpeed(),
+                            -(mouse.getPos().y - WinHeight / 2) * mouse.getSpeed(), 0.0);
+        glm::vec3 ov = camera.getView();
+        camera.setVectView((nv + ov));
+        
+        //std::cerr << mouse.getPos().x << " " << mouse.getPos().y << std::endl;
+        //glutWarpPointer(WinWidth / 2, WinHeight / 2);
+    }
 }
 
 void display() {

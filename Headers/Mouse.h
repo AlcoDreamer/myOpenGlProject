@@ -10,8 +10,8 @@
 #define Mouse_h
 
 #include <Glut/glut.h>
+#include "glm/glm.hpp"
 #include <map>
-#include "Geometry.h"
 
 void mouseButtonFunc(int button, int state, int x, int y);
 
@@ -29,19 +29,24 @@ public:
     void buttonDownEvent(int);
     void setPos(int, int);
     
-    Vect2ll getPos();
+    glm::ivec2 getPos();
     long double getSpeed();
     
     bool wasButtonPressed(int);
     bool wasButtonReleased(int);
     bool isButtonHeld(int);
 
+    void mouseOn();
+    void mouseOff();
+    bool getMouseStatus();
+    
 private:
     std::map < int, bool > _heldButton;
     std::map < int, bool > _pressedButton;
     std::map < int, bool > _releasedButton;
     
     int x, y;
+    bool mouseStatus;
     long double speed;
 };
 
