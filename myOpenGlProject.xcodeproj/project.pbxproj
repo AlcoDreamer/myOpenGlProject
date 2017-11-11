@@ -105,11 +105,11 @@
 			isa = PBXGroup;
 			children = (
 				130274FA1FB5ECA3007E4DD9 /* General.h */,
+				130274F91FB5ECA3007E4DD9 /* Object.h */,
 				130274F51FB5ECA3007E4DD9 /* Geometry.h */,
 				130274F61FB5ECA3007E4DD9 /* Graphics.h */,
 				130274F71FB5ECA3007E4DD9 /* Keyboard.h */,
 				130274F81FB5ECA3007E4DD9 /* Mouse.h */,
-				130274F91FB5ECA3007E4DD9 /* Object.h */,
 			);
 			path = Headers;
 			sourceTree = "<group>";
