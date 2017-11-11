@@ -18,11 +18,11 @@ void mouseButtonFunc(int button, int state, int x, int y) {
 }
 
 void mouseMotionFunc(int x, int y) {
-    mouse.setPos(x, y);
+    mouse.setPos(glm::ivec2(x, y));
 }
 
 void mousePassiveMotionFunc(int x, int y) {
-    mouse.setPos(x, y);
+    mouse.setPos(glm::ivec2(x, y));
 }
 
 Mouse::Mouse() {}
@@ -55,12 +55,21 @@ bool Mouse::wasButtonReleased(int button) {
     return this->_releasedButton[button];
 }
 
-void Mouse::setPos(int x, int y) {
-    this->x = x; this->y = y;
+void Mouse::setPos(glm::ivec2 pos) {
+    this->oldPos =  this->pos;
+    this->pos = pos;
+}
+
+void Mouse::clean() {
+    this->oldPos =  this->pos;
 }
 
 glm::ivec2 Mouse::getPos() {
-    return glm::ivec2(this->x, this->y);
+    return this->pos;
+}
+
+glm::ivec2 Mouse::getOldPos() {
+    return this->oldPos;
 }
 
 long double Mouse::getSpeed() {

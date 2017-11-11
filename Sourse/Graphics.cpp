@@ -16,7 +16,7 @@ int curWinWidth = WinWidth;
 int curWinHeight = WinHeight;
 
 Keyboard keyboard;
-Mouse mouse(0.0001);
+Mouse mouse(0.01);
 
 void init(int * argc, char ** argv) {
     glutInit(argc, argv);
@@ -149,13 +149,18 @@ void checkMouse() {
     }
     
     if (mouse.getMouseStatus()) {
-        glm::vec3 nv = glm::vec3((mouse.getPos().x - WinWidth / 2) * mouse.getSpeed(),
-                            -(mouse.getPos().y - WinHeight / 2) * mouse.getSpeed(), 0.0);
+        glm::ivec2 delta = mouse.getPos() - mouse.getOldPos();
+        std::cerr << delta.x << " " << delta.y << std::endl;
+        glm::vec3 nv = glm::vec3(delta.x * mouse.getSpeed(), -delta.y * mouse.getSpeed(), 0.0);
+        std::cerr << delta.x << " " << delta.y << std::endl;
+        
         glm::vec3 ov = camera.getView();
         camera.setVectView((nv + ov));
-        
-        //std::cerr << mouse.getPos().x << " " << mouse.getPos().y << std::endl;
-        //glutWarpPointer(WinWidth / 2, WinHeight / 2);
+        if (mouse.getOldPos() != mouse.getPos()) {
+            glutWarpPointer(WinWidth / 2, WinHeight / 2);
+            mouse.clean();
+            //camera.move(df, du, dr);
+        }
     }
 }
 

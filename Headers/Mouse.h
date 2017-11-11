@@ -27,9 +27,10 @@ public:
     
     void buttonUpEvent(int);
     void buttonDownEvent(int);
-    void setPos(int, int);
+    void setPos(glm::ivec2);
     
     glm::ivec2 getPos();
+    glm::ivec2 getOldPos();
     long double getSpeed();
     
     bool wasButtonPressed(int);
@@ -38,6 +39,7 @@ public:
 
     void mouseOn();
     void mouseOff();
+    void clean();
     bool getMouseStatus();
     
 private:
@@ -45,7 +47,7 @@ private:
     std::map < int, bool > _pressedButton;
     std::map < int, bool > _releasedButton;
     
-    int x, y;
+    glm::ivec2 pos, oldPos;
     bool mouseStatus;
     long double speed;
 };
