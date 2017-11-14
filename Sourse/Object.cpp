@@ -11,13 +11,11 @@
 
 Object::Object() {}
 
-Object::Object(glm::vec3 pos, glm::vec3 vectFront, glm::vec3 vectUp, long double speed) {
+Object::Object(glm::vec3 pos, glm::vec3 vectFront, glm::vec3 vectNorm) {
     this->setPos(pos);
     this->setVectFront(vectFront);
-    this->setVectView(vectFront);
-    this->setVectUp(vectUp);
-    this->setVectRight(this->vectFront * this->vectUp);
-    this->setSpeed(speed);
+    this->setVectNorm(vectNorm);
+    this->setVectRight(glm::cross(this->vectFront, this->vectNorm));
 }
 
 Object::~Object() {}
@@ -30,20 +28,13 @@ void Object::setVectFront(glm::vec3 vectFront) {
     this->vectFront = vectFront;
 }
 
-void Object::setVectUp(glm::vec3 vectUp) {
-    this->vectUp = vectUp;
+void Object::setVectNorm(glm::vec3 vectNorm) {
+    this->vectNorm = vectNorm;
+    //std::cerr << this->vectNorm.x << this->vectNorm.y << this->vectNorm.z << std::endl;
 }
 
 void Object::setVectRight(glm::vec3 vectRight) {
     this->vectRight = vectRight;
-}
-
-void Object::setVectView(glm::vec3 vectView) {
-    this->vectView = vectView;
-}
-
-void Object::setSpeed(long double speed) {
-    this->speed = speed;
 }
 
 glm::vec3 Object::getPos() {
@@ -54,22 +45,6 @@ glm::vec3 Object::getFront() {
     return this->vectFront;
 }
 
-glm::vec3 Object::getView() {
-    return this->vectView;
-}
-
 glm::vec3 Object::getNorm() {
-    return this->vectUp;
-}
-
-void Object::move(float kf, float ku, float kr) {
-    this->setVectRight(glm::cross(this->vectFront, this->vectUp));
-    
-    this->delta = this->vectFront * kf + this->vectUp * ku + this->vectRight * kr;
-    if (this->delta != glm::vec3(0.0)) {
-        this->delta = glm::normalize(this->delta) * this->speed;
-    }
-    //std::cerr << v.x << " " << v.y << " " << v.z << std::endl;
-    //std::cerr << v2.x << " " << v2.y << " " << v2.z << std::endl;
-    this->pos = this->pos + this->delta;
+    return this->vectNorm;
 }

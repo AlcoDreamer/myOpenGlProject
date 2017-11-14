@@ -7,18 +7,16 @@
 //
 
 #include "Graphics.h"
-#include "General.h"
-#include "Keyboard.h"
-#include "Object.h"
-#include "Mouse.h"
 
 int curWinWidth = WinWidth;
 int curWinHeight = WinHeight;
 
 Keyboard keyboard;
 Mouse mouse(0.01);
+Camera camera(glm::vec3(0.0, 0.0, 10.0), glm::vec3(0.0, 0.0, -1.0), glm::vec3(0.0, 1.0, 0.0), 0.1);
 
 void init(int * argc, char ** argv) {
+    //std::cerr << camera.getNorm().x << camera.getNorm().y << camera.getNorm().z << std::endl;
     glutInit(argc, argv);
     glutInitDisplayMode(GLUT_DEPTH | GLUT_DOUBLE | GLUT_RGBA);
 }
@@ -31,6 +29,7 @@ void createWindow(int width, int height, int posx, int posy) {
     glutDisplayFunc(display);
     glutReshapeFunc(reshape);
     glutIdleFunc(display);
+    
     glEnable(GL_DEPTH_TEST);
     glEnable(GL_CULL_FACE);
     
@@ -45,6 +44,7 @@ void createWindow(int width, int height, int posx, int posy) {
     glutMotionFunc(mouseMotionFunc);
     glutPassiveMotionFunc(mousePassiveMotionFunc);
     //glutFullScreen();
+    
 }
 
 void loop() {
@@ -52,16 +52,16 @@ void loop() {
 }
 
 long double df = 0.0, dr = 0.0, du = 0.0;
-Object camera(glm::vec3(0.0, 0.0, 10.0), glm::vec3(0.0, 0.0, -1.0), glm::vec3(0.0, 1.0, 0.0), 0.1);
 
 void setCamera() {
     glm::vec3 v1, v2, v3;
     v1 = camera.getPos();
     v2 = v1 + camera.getView();
-    //std::cerr << camera.getView().x << " " << camera.getView().y << " " << camera.getView().z << std::endl;
-    //std::cerr << v1.x << " " << v1.y << " " << v1.z << std::endl;
-    //std::cerr << v2.x << " " << v2.y << " " << v2.z << std::endl;
     v3 = camera.getNorm();
+    //std::cerr << camera.getView().x << " " << camera.getView().y << " " << camera.getView().z << std::endl;
+    //std::cerr << "Pos  = " << v1.x << " " << v1.y << " " << v1.z << std::endl;
+    std::cerr << "To   = " << v2.x << " " << v2.y << " " << v2.z << std::endl;
+    //std::cerr << "Norm = " << v3.x << " " << v3.y << " " << v3.z << std::endl;
     gluLookAt(v1.x, v1.y, v1.z,
               v2.x, v2.y, v2.z,
               v3.x, v3.y, v3.z);
@@ -150,14 +150,14 @@ void checkMouse() {
     
     if (mouse.getMouseStatus()) {
         glm::ivec2 delta = mouse.getPos() - mouse.getOldPos();
-        std::cerr << delta.x << " " << delta.y << std::endl;
+        //std::cerr << delta.x << " " << delta.y << std::endl;
         glm::vec3 nv = glm::vec3(delta.x * mouse.getSpeed(), -delta.y * mouse.getSpeed(), 0.0);
-        std::cerr << delta.x << " " << delta.y << std::endl;
+        //std::cerr << delta.x << " " << delta.y << std::endl;
         
         glm::vec3 ov = camera.getView();
         camera.setVectView((nv + ov));
         if (mouse.getOldPos() != mouse.getPos()) {
-            glutWarpPointer(WinWidth / 2, WinHeight / 2);
+            //glutWarpPointer(WinWidth / 2, WinHeight / 2);
             mouse.clean();
             //camera.move(df, du, dr);
         }

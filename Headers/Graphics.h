@@ -12,6 +12,12 @@
 #include <Glut/glut.h>
 #include <stdlib.h>
 
+#include "General.h"
+#include "Keyboard.h"
+#include "Camera.h"
+#include "Mouse.h"
+
+
 void init(int * , char **);
 
 void createWindow(int , int, int, int);
