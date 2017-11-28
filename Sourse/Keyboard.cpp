@@ -7,8 +7,10 @@
 //
 
 #include "Keyboard.h"
+#include "Camera.h"
 
 extern Keyboard keyboard;
+extern Camera camera;
 
 void keyDown(unsigned char key, int x, int y) {
     keyboard.keyDownEvent(key);
@@ -84,4 +86,30 @@ bool Keyboard::wasSpecialKeyReleased(int key) {
 
 bool Keyboard::isSpecialKeyHeld(int key) {
     return _heldSpecialKeys[key];
+}
+
+void Keyboard::check() {
+    long double df, dr, du;
+    df = dr = du = 0;
+    if (this->wasKeyPressed(27))
+        exit(0);
+    if (this->isKeyHeld('w')) {
+        df = 1;
+    }
+    if (this->isKeyHeld('s')) {
+        df = -1;
+    }
+    if (this->isKeyHeld('a')) {
+        dr = -1;
+    }
+    if (this->isKeyHeld('d')) {
+        dr = 1;
+    }
+    if (this->isSpecialKeyHeld(GLUT_KEY_UP)) {
+        du = 1;
+    }
+    if (this->isSpecialKeyHeld(GLUT_KEY_DOWN)) {
+        du = -1;
+    }
+    camera.setDeltaMove(glm::vec3(df, du, dr));
 }

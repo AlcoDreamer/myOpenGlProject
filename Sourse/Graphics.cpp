@@ -43,6 +43,7 @@ void createWindow(int width, int height, int posx, int posy) {
     glutMouseFunc(mouseButtonFunc);
     glutMotionFunc(mouseMotionFunc);
     glutPassiveMotionFunc(mousePassiveMotionFunc);
+    //glutSetCursor(GLUT_CURSOR_NONE);
     //glutFullScreen();
     
 }
@@ -51,16 +52,13 @@ void loop() {
     glutMainLoop();
 }
 
-long double df = 0.0, dr = 0.0, du = 0.0;
-
 void setCamera() {
     glm::vec3 v1, v2, v3;
     v1 = camera.getPos();
     v2 = v1 + camera.getView();
     v3 = camera.getNorm();
-    //std::cerr << camera.getView().x << " " << camera.getView().y << " " << camera.getView().z << std::endl;
     //std::cerr << "Pos  = " << v1.x << " " << v1.y << " " << v1.z << std::endl;
-    std::cerr << "To   = " << v2.x << " " << v2.y << " " << v2.z << std::endl;
+    //std::cerr << "To   = " << v2.x << " " << v2.y << " " << v2.z << std::endl;
     //std::cerr << "Norm = " << v3.x << " " << v3.y << " " << v3.z << std::endl;
     gluLookAt(v1.x, v1.y, v1.z,
               v2.x, v2.y, v2.z,
@@ -116,60 +114,12 @@ void drawSnowMan() {
     glutSolidCone(0.08f,0.5f,10,2);
 }
 
-void checkKerboard() {
-    df = dr = du = 0;
-    if (keyboard.wasKeyPressed(27))
-        exit(0);
-    if (keyboard.isKeyHeld('w')) {
-        df = 1;
-    }
-    if (keyboard.isKeyHeld('s')) {
-        df = -1;
-    }
-    if (keyboard.isKeyHeld('a')) {
-        dr = -1;
-    }
-    if (keyboard.isKeyHeld('d')) {
-        dr = 1;
-    }
-    if (keyboard.isSpecialKeyHeld(GLUT_KEY_UP)) {
-        du = 1;
-    }
-    if (keyboard.isSpecialKeyHeld(GLUT_KEY_DOWN)) {
-        du = -1;
-    }
-}
-
-void checkMouse() {
-    if (mouse.isButtonHeld(GLUT_LEFT_BUTTON)) {
-        mouse.mouseOn();
-    }
-    if (mouse.isButtonHeld(GLUT_RIGHT_BUTTON)) {
-        mouse.mouseOff();
-    }
-    
-    if (mouse.getMouseStatus()) {
-        glm::ivec2 delta = mouse.getPos() - mouse.getOldPos();
-        //std::cerr << delta.x << " " << delta.y << std::endl;
-        glm::vec3 nv = glm::vec3(delta.x * mouse.getSpeed(), -delta.y * mouse.getSpeed(), 0.0);
-        //std::cerr << delta.x << " " << delta.y << std::endl;
-        
-        glm::vec3 ov = camera.getView();
-        camera.setVectView((nv + ov));
-        if (mouse.getOldPos() != mouse.getPos()) {
-            //glutWarpPointer(WinWidth / 2, WinHeight / 2);
-            mouse.clean();
-            //camera.move(df, du, dr);
-        }
-    }
-}
-
 void display() {
 
-    checkKerboard();
-    checkMouse();
+    keyboard.check();
+    mouse.check();
     //std::cerr << camera.getPos().x << " " << camera.getPos().y << " " << camera.getPos().z << std::endl;
-    camera.move(df, du, dr);
+    camera.move();
     
     glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 

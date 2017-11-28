@@ -27,6 +27,7 @@ public:
     ~Keyboard();
     
     void beginNewFrame();
+    void check();
     
     void keyUpEvent(unsigned char key);
     void keyDownEvent(unsigned char key);

@@ -29,7 +29,9 @@ glm::vec3 Camera::getView() {
     return this->vectView;
 }
 
-void Camera::move(float kf, float ku, float kr) {
+void Camera::move() {
+    float kf, ku, kr;
+    kf = this->dMove.x; ku = this->dMove.y; kr = this->dMove.z;
     this->setVectRight(glm::cross(this->vectFront, this->vectNorm));
     
     this->delta = this->vectFront * kf + this->vectNorm * ku + this->vectRight * kr;
@@ -39,4 +41,12 @@ void Camera::move(float kf, float ku, float kr) {
     //std::cerr << v.x << " " << v.y << " " << v.z << std::endl;
     //std::cerr << v2.x << " " << v2.y << " " << v2.z << std::endl;
     this->pos = this->pos + this->delta;
+}
+
+void Camera::setDeltaMove(glm::vec3 dMove) {
+    this->dMove = dMove;
+}
+
+glm::vec3 Camera::getDeltaMove() {
+    return this->dMove;
 }

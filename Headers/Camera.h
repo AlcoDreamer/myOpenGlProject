@@ -19,12 +19,14 @@ public:
     
     void setVectView(glm::vec3);
     void setSpeed(long double);
+    void setDeltaMove(glm::vec3);
     
     glm::vec3 getView();
+    glm::vec3 getDeltaMove();
     
-    void move(float, float, float);
+    void move();
 private:
-    glm::vec3 delta, vectView;
+    glm::vec3 delta, vectView, dMove;
 };
 
 #endif /* Camera_h */

@@ -28,6 +28,7 @@ public:
     void buttonUpEvent(int);
     void buttonDownEvent(int);
     void setPos(glm::ivec2);
+    void setWarpFlag(bool warpFlag);
     
     glm::ivec2 getPos();
     glm::ivec2 getOldPos();
@@ -40,7 +41,10 @@ public:
     void mouseOn();
     void mouseOff();
     void clean();
+    void check();
+    void setCursorInCentre(int WinH, int WinW);
     bool getMouseStatus();
+    bool getWarpFlag();
     
 private:
     std::map < int, bool > _heldButton;
@@ -48,7 +52,7 @@ private:
     std::map < int, bool > _releasedButton;
     
     glm::ivec2 pos, oldPos;
-    bool mouseStatus;
+    bool mouseStatus, warpFlag;
     long double speed;
 };
 

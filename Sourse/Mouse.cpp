@@ -7,8 +7,11 @@
 //
 
 #include "Mouse.h"
+#include "Camera.h"
+#include "General.h"
 
 extern Mouse mouse;
+extern Camera camera;
 
 void mouseButtonFunc(int button, int state, int x, int y) {
     if (state == GLUT_DOWN)
@@ -56,6 +59,10 @@ bool Mouse::wasButtonReleased(int button) {
 }
 
 void Mouse::setPos(glm::ivec2 pos) {
+    if (this->getWarpFlag()) {
+        this->setWarpFlag(false);
+        return;
+    }
     this->oldPos =  this->pos;
     this->pos = pos;
 }
@@ -87,3 +94,49 @@ void Mouse::mouseOff() {
 bool Mouse::getMouseStatus() {
     return this->mouseStatus;
 }
+
+void Mouse::setWarpFlag(bool warpFlag) {
+    this->warpFlag = warpFlag;
+}
+
+void Mouse::setCursorInCentre(int width, int height) {
+    this->setWarpFlag(true);
+    glutWarpPointer(width / 2, height / 2);
+    //this->setPos(glm::ivec2(0, 0));
+}
+
+bool Mouse::getWarpFlag() {
+    return this->warpFlag;
+}
+
+void Mouse::check() {
+    if (mouse.isButtonHeld(GLUT_LEFT_BUTTON)) {
+        mouse.mouseOn();
+    }
+    if (mouse.isButtonHeld(GLUT_RIGHT_BUTTON)) {
+        mouse.mouseOff();
+    }
+    if (mouse.getMouseStatus()) {
+        glm::ivec2 delta = glm::ivec2(0, 0);
+        //if (mouse.getWarpFlag())
+        delta = mouse.getPos() - mouse.getOldPos();
+        
+        //float angelXZ = asin(delta.x * mouse.getSpeed());
+        //float angelYZ = asin(delta.y * mouse.getSpeed());
+        
+        //std::cerr << delta.x << " " << delta.y << std::endl;
+        glm::vec3 nv = glm::vec3(delta.x * mouse.getSpeed(), -delta.y * mouse.getSpeed(), 0.0);
+        //std::cerr << delta.x << " " << delta.y << std::endl;
+        
+        glm::vec3 ov = camera.getView();
+        camera.setVectView((nv + ov));
+        
+        mouse.setCursorInCentre(WinWidth, WinHeight);
+        
+        //mouse.clean();
+    }
+}
+
+
+
+
