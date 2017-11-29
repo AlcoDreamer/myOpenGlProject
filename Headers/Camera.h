@@ -24,10 +24,9 @@ public:
     glm::vec3 getView();
     glm::vec3 getDeltaMove();
     
-    void move();
     void set();
 private:
-    glm::vec3 delta, vectView, dMove;
+    glm::vec3 vectView;
 };
 
 #endif /* Camera_h */

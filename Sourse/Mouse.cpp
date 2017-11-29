@@ -21,11 +21,11 @@ void mouseButtonFunc(int button, int state, int x, int y) {
 }
 
 void mouseMotionFunc(int x, int y) {
-    mouse.setPos(glm::ivec2(x, y));
+    mouse.motion(x, y);
 }
 
 void mousePassiveMotionFunc(int x, int y) {
-    mouse.setPos(glm::ivec2(x, y));
+    mouse.motion(x, y);
 }
 
 Mouse::Mouse() {}
@@ -58,12 +58,15 @@ bool Mouse::wasButtonReleased(int button) {
     return this->_releasedButton[button];
 }
 
+void Mouse::forgеtButton(int button) {
+    this->_heldButton[button] = false;
+    this->_pressedButton[button] = false;
+    this->_releasedButton[button] = false;
+    
+}
+
 void Mouse::setPos(glm::ivec2 pos) {
-    if (this->getWarpFlag()) {
-        this->setWarpFlag(false);
-        return;
-    }
-    this->oldPos =  this->pos;
+    this->oldPos = this->pos;
     this->pos = pos;
 }
 
@@ -100,43 +103,53 @@ void Mouse::setWarpFlag(bool warpFlag) {
 }
 
 void Mouse::setCursorInCentre(int width, int height) {
-    this->setWarpFlag(true);
     glutWarpPointer(width / 2, height / 2);
-    //this->setPos(glm::ivec2(0, 0));
 }
 
 bool Mouse::getWarpFlag() {
     return this->warpFlag;
 }
 
-void Mouse::check() {
-    if (mouse.isButtonHeld(GLUT_LEFT_BUTTON)) {
-        mouse.mouseOn();
-    }
-    if (mouse.isButtonHeld(GLUT_RIGHT_BUTTON)) {
-        mouse.mouseOff();
-    }
-    if (mouse.getMouseStatus()) {
-        glm::ivec2 delta = glm::ivec2(0, 0);
-        //if (mouse.getWarpFlag())
-        delta = mouse.getPos() - mouse.getOldPos();
-        
-        //float angelXZ = asin(delta.x * mouse.getSpeed());
-        //float angelYZ = asin(delta.y * mouse.getSpeed());
-        
-        //std::cerr << delta.x << " " << delta.y << std::endl;
-        glm::vec3 nv = glm::vec3(delta.x * mouse.getSpeed(), -delta.y * mouse.getSpeed(), 0.0);
-        //std::cerr << delta.x << " " << delta.y << std::endl;
-        
-        glm::vec3 ov = camera.getView();
-        camera.setVectView((nv + ov));
-        
-        mouse.setCursorInCentre(WinWidth, WinHeight);
-        
-        //mouse.clean();
+void Mouse::motion(int x, int y) {
+    mouse.setPos(glm::ivec2(x, y));
+    if (mouse.getWarpFlag()) {
+        mouse.setWarpFlag(false);
+        mouse.clean();
+    } else {
+        mouse.check();
     }
 }
 
+void Mouse::check() {
+    if (mouse.wasButtonPressed(GLUT_LEFT_BUTTON)) {
+        mouse.mouseOn();
+    }
+    if (mouse.wasButtonReleased(GLUT_RIGHT_BUTTON)) {
+        mouse.mouseOff();
+        mouse.forgеtButton(GLUT_LEFT_BUTTON);
+        mouse.forgеtButton(GLUT_RIGHT_BUTTON);
+    }
+    if (mouse.getMouseStatus()) {
+        glm::ivec2 delta = glm::ivec2(0, 0);
+        delta = mouse.getPos() - mouse.getOldPos();
+        
+        float angelXZ = -(delta.x * mouse.getSpeed());
+        float angelYZ = -(delta.y * mouse.getSpeed());
+        
+        glm::mat3 MY = glm::mat3(cos(angelXZ), 0.0, sin(angelXZ),
+                                 0.0, 1.0, 0.0,
+                                 -sin(angelXZ), 0.0, cos(angelXZ));
 
-
-
+        std::cerr << delta.x << " " << delta.y << std::endl;
+        
+        glm::vec3 newVectView  = camera.getView() * MY;
+        glm::vec3 newVectFront = camera.getFront() * MY;
+        
+        camera.setVectView(newVectView);
+        camera.setVectFront(newVectFront);
+        
+        //mouse.setWarpFlag(true);
+        //mouse.setCursorInCentre(WinWidth, WinHeight);
+    }
+    mouse.clean();
+}

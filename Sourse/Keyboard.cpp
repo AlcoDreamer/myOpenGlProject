@@ -13,19 +13,25 @@ extern Keyboard keyboard;
 extern Camera camera;
 
 void keyDown(unsigned char key, int x, int y) {
+    key = tolower(key);
     keyboard.keyDownEvent(key);
+    keyboard.check();
 }
 
 void keyUp(unsigned char key, int x, int y) {
+    key = tolower(key);
     keyboard.keyUpEvent(key);
+    keyboard.check();
 }
 
 void specialKeyDown(int key, int x, int y) {
     keyboard.specialKeyDownEvent(key);
+    keyboard.check();
 }
 
 void specialKeyUp(int key, int x, int y) {
     keyboard.specialKeyUpEvent(key);
+    keyboard.check();
 }
 
 Keyboard::Keyboard() {}
@@ -46,23 +52,19 @@ void Keyboard::keyUpEvent(unsigned char key) {
 }
 
 void Keyboard::keyDownEvent(unsigned char key) {
-    key = tolower(key);
     this->_pressedKeys[key] = true;
     this->_heldKeys[key] = true;
 }
 
 bool Keyboard::wasKeyPressed(unsigned char key) {
-    key = tolower(key);
     return _pressedKeys[key];
 }
 
 bool Keyboard::wasKeyReleased(unsigned char key) {
-    key = tolower(key);
     return _releasedKeys[key];
 }
 
 bool Keyboard::isKeyHeld(unsigned char key) {
-    key = tolower(key);
     return _heldKeys[key];
 }
 

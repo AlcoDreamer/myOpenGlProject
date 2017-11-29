@@ -37,11 +37,13 @@ public:
     bool wasButtonPressed(int);
     bool wasButtonReleased(int);
     bool isButtonHeld(int);
+    void forgеtButton(int);
 
     void mouseOn();
     void mouseOff();
     void clean();
     void check();
+    void motion(int x, int y);
     void setCursorInCentre(int WinH, int WinW);
     bool getMouseStatus();
     bool getWarpFlag();
