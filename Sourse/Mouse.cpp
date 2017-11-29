@@ -62,7 +62,6 @@ void Mouse::forgеtButton(int button) {
     this->_heldButton[button] = false;
     this->_pressedButton[button] = false;
     this->_releasedButton[button] = false;
-    
 }
 
 void Mouse::setPos(glm::ivec2 pos) {
@@ -130,32 +129,45 @@ void Mouse::check() {
         mouse.forgеtButton(GLUT_RIGHT_BUTTON);
     }
     if (mouse.getMouseStatus()) {
+        // смещение мыши на экране
         glm::ivec2 delta = glm::ivec2(0);
         delta = mouse.getPos() - mouse.getOldPos();
         
+        // угол, на который надо повернуть относительно прошлого состояния
         float dAngelXZ = -(delta.x * mouse.getSpeed());
         float dAngelYZ = -(delta.y * mouse.getSpeed());
         
+        // вычисляем суммарный угол поворота относительно дефоулта
         float angelXZ = camera.getAngelXZ() + dAngelXZ;
         float angelYZ = camera.getAngelYZ() + dAngelYZ;
         
+        // аккуратно смотрим вниз и вверх
         angelYZ = fmax(-M_PI / 2, angelYZ);
         angelYZ = fmin(angelYZ, M_PI / 2);
-        
+
+        // матрица поворота относительно оси OY
         glm::mat3 MY = glm::mat3(cos(angelXZ), 0.0, sin(angelXZ),
                                  0.0, 1.0, 0.0,
                                  -sin(angelXZ), 0.0, cos(angelXZ));
-
+        
+        // матрица поворота относительно оси OX
         glm::mat3 MX = glm::mat3(1.0, 0.0, 0.0,
                                  0.0, cos(angelYZ), -sin(angelYZ),
                                  0.0, sin(angelYZ), cos(angelYZ));
         
-        std::cerr << delta.x << " " << delta.y << std::endl;
+        //std::cerr << delta.x << " " << delta.y << std::endl;
         
-        glm::vec3 newVectView   = defVectFront * MX * MY;
-        glm::vec3 newVectViewUp = defVectNorm  * MX * MY;
-        glm::vec3 newVectFront  = defVectFront * MX * MY;
+        // поворачиваем сначала вокруг OX затем вокруг OY
+        glm::vec3 newVectView, newVectViewUp, newVectFront;
+        newVectView   = defVectFront * MX * MY;
+        newVectViewUp = defVectNorm  * MX * MY;
+        std::cerr << camera.getStatus() << std::endl;
+        if (camera.getStatus() == CAMERA_FREE)
+            newVectFront = defVectFront * MX * MY;
+        else if (camera.getStatus() == CAMERA_NOT_FREE)
+            newVectFront = defVectFront * MY;
         
+        // запоминаем изменения
         camera.setVectView(newVectView);
         camera.setVectViewUp(newVectViewUp);
         camera.setVectFront(newVectFront);

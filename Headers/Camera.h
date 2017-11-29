@@ -11,6 +11,9 @@
 
 #include "Object.h"
 
+const int CAMERA_FREE = 0;
+const int CAMERA_NOT_FREE = 1;
+
 class Camera : public Object {
 public:
     Camera();
@@ -31,9 +34,13 @@ public:
     void setAngelYZ(float);
     
     void set();
+    
+    void setStatus(int);
+    int getStatus();
 private:
     glm::vec3 vectView, vectViewUp;
     float angelXZ, angelYZ;
+    int status;
 };
 
 #endif /* Camera_h */

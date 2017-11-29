@@ -35,6 +35,7 @@ public:
     bool wasKeyPressed(unsigned char key);
     bool wasKeyReleased(unsigned char key);
     bool isKeyHeld(unsigned char key);
+    void forgеtKey(unsigned char key);
 
     void specialKeyUpEvent(int key);
     void specialKeyDownEvent(int key);
@@ -42,6 +43,7 @@ public:
     bool wasSpecialKeyPressed(int key);
     bool wasSpecialKeyReleased(int key);
     bool isSpecialKeyHeld(int key);
+    void forgеtSpecialKey(int key);
 
 private:
     std::map < unsigned char, bool > _heldKeys;

@@ -15,10 +15,11 @@ Camera::~Camera() {}
 
 Camera::Camera(glm::vec3 pos, long double speed) : Object(pos) {
     this->setVectView(vectFront);
-    this->vectViewUp = vectNorm;
+    this->setVectViewUp(vectNorm);
     this->setSpeed(speed);
-    this->angelXZ = 0.0;
-    this->angelYZ = 0.0;
+    this->setAngelXZ(0.0);
+    this->setAngelYZ(0.0);
+    this->setStatus(CAMERA_NOT_FREE);
 }
 
 void Camera::setVectView(glm::vec3 vectView) {
@@ -72,4 +73,12 @@ void Camera::setAngelXZ(float angel) {
 
 void Camera::setAngelYZ(float angel) {
     this->angelYZ = angel;
+}
+
+void Camera::setStatus(int newStatus) {
+    this->status = newStatus;
+}
+
+int Camera::getStatus() {
+    return this->status;
 }
