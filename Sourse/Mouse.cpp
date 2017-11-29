@@ -130,23 +130,38 @@ void Mouse::check() {
         mouse.forgеtButton(GLUT_RIGHT_BUTTON);
     }
     if (mouse.getMouseStatus()) {
-        glm::ivec2 delta = glm::ivec2(0, 0);
+        glm::ivec2 delta = glm::ivec2(0);
         delta = mouse.getPos() - mouse.getOldPos();
         
-        float angelXZ = -(delta.x * mouse.getSpeed());
-        float angelYZ = -(delta.y * mouse.getSpeed());
+        float dAngelXZ = -(delta.x * mouse.getSpeed());
+        float dAngelYZ = -(delta.y * mouse.getSpeed());
+        
+        float angelXZ = camera.getAngelXZ() + dAngelXZ;
+        float angelYZ = camera.getAngelYZ() + dAngelYZ;
+        
+        angelYZ = fmax(-M_PI / 2, angelYZ);
+        angelYZ = fmin(angelYZ, M_PI / 2);
         
         glm::mat3 MY = glm::mat3(cos(angelXZ), 0.0, sin(angelXZ),
                                  0.0, 1.0, 0.0,
                                  -sin(angelXZ), 0.0, cos(angelXZ));
 
+        glm::mat3 MX = glm::mat3(1.0, 0.0, 0.0,
+                                 0.0, cos(angelYZ), -sin(angelYZ),
+                                 0.0, sin(angelYZ), cos(angelYZ));
+        
         std::cerr << delta.x << " " << delta.y << std::endl;
         
-        glm::vec3 newVectView  = camera.getView() * MY;
-        glm::vec3 newVectFront = camera.getFront() * MY;
+        glm::vec3 newVectView   = defVectFront * MX * MY;
+        glm::vec3 newVectViewUp = defVectNorm  * MX * MY;
+        glm::vec3 newVectFront  = defVectFront * MX * MY;
         
         camera.setVectView(newVectView);
+        camera.setVectViewUp(newVectViewUp);
         camera.setVectFront(newVectFront);
+        
+        camera.setAngelXZ(angelXZ);
+        camera.setAngelYZ(angelYZ);
         
         //mouse.setWarpFlag(true);
         //mouse.setCursorInCentre(WinWidth, WinHeight);

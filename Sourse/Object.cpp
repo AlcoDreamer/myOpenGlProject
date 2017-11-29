@@ -8,13 +8,14 @@
 
 #include "Object.h"
 #include <iostream>
+#include "General.h"
 
 Object::Object() {}
 
-Object::Object(glm::vec3 pos, glm::vec3 vectFront, glm::vec3 vectNorm) {
+Object::Object(glm::vec3 pos) {
     this->setPos(pos);
-    this->setVectFront(vectFront);
-    this->setVectNorm(vectNorm);
+    this->setVectFront(defVectFront);
+    this->setVectNorm(defVectNorm);
     this->setVectRight(glm::cross(this->vectFront, this->vectNorm));
 }
 

@@ -14,19 +14,26 @@
 class Camera : public Object {
 public:
     Camera();
-    Camera(glm::vec3 pos, glm::vec3 front, glm::vec3 norm, long double speed);
+    Camera(glm::vec3 pos, long double speed);
     ~Camera();
     
     void setVectView(glm::vec3);
+    void setVectViewUp(glm::vec3);
     void setSpeed(long double);
     void setDeltaMove(glm::vec3);
     
     glm::vec3 getView();
     glm::vec3 getDeltaMove();
     
+    float getAngelXZ();
+    float getAngelYZ();
+    void setAngelXZ(float);
+    void setAngelYZ(float);
+    
     void set();
 private:
-    glm::vec3 vectView;
+    glm::vec3 vectView, vectViewUp;
+    float angelXZ, angelYZ;
 };
 
 #endif /* Camera_h */

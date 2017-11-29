@@ -13,7 +13,7 @@ int curWinHeight = WinHeight;
 
 Keyboard keyboard;
 Mouse mouse(0.01);
-Camera camera(glm::vec3(0.0, 0.0, 10.0), glm::vec3(0.0, 0.0, -1.0), glm::vec3(0.0, 1.0, 0.0), 0.1);
+Camera camera(glm::vec3(0.0, 0.0, 10.0), 0.1);
 
 void init(int * argc, char ** argv) {
     //std::cerr << camera.getNorm().x << camera.getNorm().y << camera.getNorm().z << std::endl;
@@ -101,6 +101,17 @@ void drawSnowMan() {
     glutSolidCone(0.08f,0.5f,10,2);
 }
 
+void drawFlat() {
+    glColor3f(0.9f, 0.9f, 0.9f);
+    glBegin(GL_QUADS);
+        glVertex3f(-10.0f, -20.0f, -10.0f);
+        glVertex3f(-10.0f, -20.0f,  10.0f);
+        glVertex3f( 10.0f, -20.0f,  10.0f);
+        glVertex3f( 10.0f, -20.0f, -10.0f);
+    
+    glEnd();
+}
+
 void display() {
 
     //keyboard.check();
@@ -115,6 +126,7 @@ void display() {
     
     drawPiramid();
     drawSnowMan();
+    drawFlat();
     
     glutSwapBuffers();
 }

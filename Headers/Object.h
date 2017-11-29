@@ -15,7 +15,7 @@
 class Object {
 public:
     Object();
-    Object(glm::vec3 pos, glm::vec3 front, glm::vec3 norm);
+    Object(glm::vec3 pos);
     ~Object();
     
     void setPos(glm::vec3);

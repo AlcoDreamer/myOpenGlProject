@@ -13,13 +13,20 @@ Camera::Camera() {}
 
 Camera::~Camera() {}
 
-Camera::Camera(glm::vec3 pos, glm::vec3 vectFront, glm::vec3 vectNorm, long double speed) : Object(pos, vectFront, vectNorm) {
+Camera::Camera(glm::vec3 pos, long double speed) : Object(pos) {
     this->setVectView(vectFront);
+    this->vectViewUp = vectNorm;
     this->setSpeed(speed);
+    this->angelXZ = 0.0;
+    this->angelYZ = 0.0;
 }
 
 void Camera::setVectView(glm::vec3 vectView) {
     this->vectView = vectView;
+}
+
+void Camera::setVectViewUp(glm::vec3 vectViewUp) {
+    this->vectViewUp = vectViewUp;
 }
 
 void Camera::setSpeed(long double speed) {
@@ -40,13 +47,29 @@ glm::vec3 Camera::getDeltaMove() {
 
 void Camera::set() {
     glm::vec3 v1, v2, v3;
-    v1 = this->getPos();
-    v2 = v1 + this->getView();
-    v3 = this->getNorm();
+    v1 = this->pos;
+    v2 = v1 + this->vectView;
+    v3 = this->vectViewUp;
     //std::cerr << "Pos  = " << v1.x << " " << v1.y << " " << v1.z << std::endl;
     //std::cerr << "To   = " << v2.x << " " << v2.y << " " << v2.z << std::endl;
     //std::cerr << "Norm = " << v3.x << " " << v3.y << " " << v3.z << std::endl;
     gluLookAt(v1.x, v1.y, v1.z,
               v2.x, v2.y, v2.z,
               v3.x, v3.y, v3.z);
+}
+
+float Camera::getAngelXZ() {
+    return this->angelXZ;
+}
+
+float Camera::getAngelYZ() {
+    return this->angelYZ;
+}
+
+void Camera::setAngelXZ(float angel) {
+    this->angelXZ = angel;
+}
+
+void Camera::setAngelYZ(float angel) {
+    this->angelYZ = angel;
 }
