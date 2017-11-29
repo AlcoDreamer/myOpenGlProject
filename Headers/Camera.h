@@ -25,6 +25,7 @@ public:
     glm::vec3 getDeltaMove();
     
     void move();
+    void set();
 private:
     glm::vec3 delta, vectView, dMove;
 };

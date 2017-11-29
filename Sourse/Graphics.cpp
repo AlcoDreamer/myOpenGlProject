@@ -52,19 +52,6 @@ void loop() {
     glutMainLoop();
 }
 
-void setCamera() {
-    glm::vec3 v1, v2, v3;
-    v1 = camera.getPos();
-    v2 = v1 + camera.getView();
-    v3 = camera.getNorm();
-    //std::cerr << "Pos  = " << v1.x << " " << v1.y << " " << v1.z << std::endl;
-    //std::cerr << "To   = " << v2.x << " " << v2.y << " " << v2.z << std::endl;
-    //std::cerr << "Norm = " << v3.x << " " << v3.y << " " << v3.z << std::endl;
-    gluLookAt(v1.x, v1.y, v1.z,
-              v2.x, v2.y, v2.z,
-              v3.x, v3.y, v3.z);
-}
-
 void drawPiramid() {
     glBegin(GL_TRIANGLES);
         glColor3f(0.0f,0.0f,1.0f);  glVertex3f( 1.0f,-1.0f, 1.0f);
@@ -125,7 +112,7 @@ void display() {
 
     glLoadIdentity();
 
-    setCamera();
+    camera.set();
     
     drawPiramid();
     drawSnowMan();
