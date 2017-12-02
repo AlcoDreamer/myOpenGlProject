@@ -18,6 +18,7 @@ void mouseButtonFunc(int button, int state, int x, int y) {
         mouse.buttonDownEvent(button);
     if (state == GLUT_UP)
         mouse.buttonUpEvent(button);
+    mouse.check();
 }
 
 void mouseMotionFunc(int x, int y) {
@@ -32,6 +33,8 @@ Mouse::Mouse() {}
 
 Mouse::Mouse(long double speed) {
     this->speed = speed;
+    this->pos = glm::ivec2(glutGet( GLUT_WINDOW_WIDTH ) / 2, glutGet( GLUT_WINDOW_HEIGHT ) / 2);
+    this->clean();
 }
 
 Mouse::~Mouse() {}
@@ -176,7 +179,7 @@ void Mouse::check() {
         camera.setAngelYZ(angelYZ);
         
         //mouse.setWarpFlag(true);
-        //mouse.setCursorInCentre(WinWidth, WinHeight);
+        //mouse.setCursorInCentre(glutGet( GLUT_WINDOW_WIDTH ), glutGet( GLUT_WINDOW_HEIGHT ));
     }
     mouse.clean();
 }
