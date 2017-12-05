@@ -105,7 +105,10 @@ void Mouse::setWarpFlag(bool warpFlag) {
 }
 
 void Mouse::setCursorInCentre(int width, int height) {
+    mouse.setWarpFlag(true);
     glutWarpPointer(width / 2, height / 2);
+    mouse.setWarpFlag(false);
+    mouse.clean();
 }
 
 bool Mouse::getWarpFlag() {
@@ -125,10 +128,10 @@ void Mouse::motion(int x, int y) {
 void Mouse::check() {
     if (mouse.wasButtonPressed(GLUT_LEFT_BUTTON)) {
         mouse.mouseOn();
+        mouse.forgеtButton(GLUT_LEFT_BUTTON);
     }
     if (mouse.wasButtonReleased(GLUT_RIGHT_BUTTON)) {
         mouse.mouseOff();
-        mouse.forgеtButton(GLUT_LEFT_BUTTON);
         mouse.forgеtButton(GLUT_RIGHT_BUTTON);
     }
     if (mouse.getMouseStatus()) {
@@ -178,8 +181,7 @@ void Mouse::check() {
         camera.setAngelXZ(angelXZ);
         camera.setAngelYZ(angelYZ);
         
-        //mouse.setWarpFlag(true);
-        //mouse.setCursorInCentre(glutGet( GLUT_WINDOW_WIDTH ), glutGet( GLUT_WINDOW_HEIGHT ));
+        mouse.setCursorInCentre(glutGet( GLUT_WINDOW_WIDTH ), glutGet( GLUT_WINDOW_HEIGHT ));
     }
     mouse.clean();
 }
