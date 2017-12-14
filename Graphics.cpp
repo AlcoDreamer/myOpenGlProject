@@ -68,7 +68,7 @@ void init_l() {
 	glLightf(GL_LIGHT1, GL_LINEAR_ATTENUATION, 0.4); //коэффициент k_linear при линейном члене в функции затухания f(d)
 	glLightf(GL_LIGHT1, GL_QUADRATIC_ATTENUATION, 0.8); //коэффициент k_quadratic при квадрате расстояния в функции затухания f(d)
 }
-//P.S. последние 3 функции если убрать тоже нормас свет, но без затухания
+  //P.S. последние 3 функции если убрать тоже нормас свет, но без затухания
 	void drawPiramid() {
 	
 	glBegin(GL_TRIANGLES);
