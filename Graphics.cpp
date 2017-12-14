@@ -132,26 +132,24 @@ void drawFlat() {
 	glEnd();
 
 	//FRONT
-/*glBegin(GL_QUADS);
-
+	/*glBegin(GL_QUADS);
 	glColor3f(1.0, 1.0, 1.0);
 	glVertex3f(10.0f, -5.0f, 10.0f);
 	glVertex3f(10.0f, 5.0f, 10.0f);
 	glVertex3f(-10.0f, 5.0f, 10.0f);
 	glVertex3f(-10.0f, -5.0f, 10.0f);
-
 	glEnd();*/
 
-//  RIGHT
-glBegin(GL_QUADS);
-glColor3f(1.0, 0.0, 1.0);
-glVertex3f(10.0f, -5.0f, -10.0f);
-glVertex3f(10.0f, 5.0f, -10.0f);
-glVertex3f(10.0f, 5.0f, 10.0f);
-glVertex3f(10.0f, -5.0f, 10.0f);
-glEnd();
+	//  RIGHT
+	glBegin(GL_QUADS);
+	glColor3f(1.0, 0.0, 1.0);
+	glVertex3f(10.0f, -5.0f, -10.0f);
+	glVertex3f(10.0f, 5.0f, -10.0f);
+	glVertex3f(10.0f, 5.0f, 10.0f);
+	glVertex3f(10.0f, -5.0f, 10.0f);
+	glEnd();
 
-//  LEFT
+	//  LEFT
 	glBegin(GL_QUADS);
 	glColor3f(0.0, 1.0, 0.0);
 	glVertex3f(-10.0f, -5.0f, 10.0f);
