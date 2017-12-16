@@ -60,7 +60,7 @@ void loop() {
 
 void init_l() {
 	GLfloat light1_diffuse[] = { 1.0, 0.0, 0.0 }; //массив цветов
-	GLfloat light1_position[] = { 0.5, 0.0, 1.0, 1.0 }; //массив позиций; w=1, тк иначе точечный свет
+	GLfloat light1_position[] = { 0.5, 0.0, 1.0, 1.0 }; //массив позиций; w=1, тк иначе не точечный свет
 	glEnable(GL_LIGHT1);
 	glLightfv(GL_LIGHT1, GL_DIFFUSE, light1_diffuse); //цвет рассеянного освещения, красный
 	glLightfv(GL_LIGHT1, GL_POSITION, light1_position); //позиция
