@@ -5,7 +5,7 @@
 //  Created by dchernyshev on 04.11.17.
 //  Copyright © 2017 dchernyshev. All rights reserved.
 //
-#pragma comment(lib, "GLAUX.lib")
+
 #include "Graphics.h"
 
 #define PI 3.14
